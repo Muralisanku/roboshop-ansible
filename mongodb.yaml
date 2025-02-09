@@ -7,7 +7,7 @@
      src: mongodb.repo
      dest: /etc/yum.repos.d/mongodb.repo
   - name: install mongodb
-    ansible.builtin.pacakge:
+    ansible.builtin.package:
       name: mongodb-org
       state: present
   - name: start and enable mongodb
@@ -25,5 +25,5 @@
     ansible.builtin.service:
       name: mongod
       state: restarted
-      
+
       
