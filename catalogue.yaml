@@ -55,7 +55,7 @@
       state: present
 
   - name: get the catalogue count
-    ansible.builtin.command: mongo --host mongodb.joinaiops.store </app/schema/catalogue.js
+    ansible.builtin.command: mongo --host mongodb.joinaiops.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
     register: product_count
 
   - name: print the count
