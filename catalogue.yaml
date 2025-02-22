@@ -54,6 +54,13 @@
       name: mongodb-org-shell
       state: present
 
+  - name: get the catalogue count
+    ansible.builtin.commans: mongo --host mongodb.joinaiops.store </app/schema/catalogue.js
+    register: product_count
+
+  - name: print the count
+    ansible.builtin.debug:
+      msg: "product count: {{product_count}}"
   
 
     
