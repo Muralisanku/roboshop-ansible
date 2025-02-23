@@ -1,13 +1,13 @@
-- name: Install web component
+- name: install web component
   hosts: web
   become: yes
   tasks:
   - name: install nginx
-    ansible.builtin.package:
-      name: nginx
+    ansible.builtin.dnf:
+      name: nginx 
       state: present
-
-  - name: remove the html directory
+  
+  - name: remove html directory
     ansible.builtin.file:
       path: /usr/share/nginx/html
       state: absent
@@ -17,14 +17,14 @@
       path: /usr/share/nginx/html
       state: directory
 
-  - name: download web app 
+  - name: Download web app
     ansible.builtin.get_url:
       url: https://roboshop-builds.s3.amazonaws.com/web.zip
       dest: /tmp
 
   - name: Extract application
     ansible.builtin.unarchive:
-      scr: /tmp/web.zip
+      src: /tmp/web.zip
       dest: /usr/share/nginx/html
       remote_src: yes
 
@@ -33,7 +33,7 @@
       src: roboshop.conf
       dest: /etc/nginx/default.d/roboshop.conf
 
-  - name: start and enable services
+  - name: start and enable nginx
     ansible.builtin.service:
       name: nginx
       state: restarted
